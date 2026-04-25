@@ -1,4 +1,6 @@
-from pydantic import BaseModel
+from datetime import datetime
+
+from pydantic import BaseModel, Field
 
 from backend.models.enums import ClassLabel
 
@@ -45,3 +47,35 @@ class AnalyzeResponse(BaseModel):
     flows: list[FlowResult]
     summary: AnalysisSummary
     processing_time_ms: float
+
+
+class ScanStartRequest(BaseModel):
+    interface: str = Field(..., min_length=1, max_length=32, pattern=r"^[a-zA-Z0-9_-]+$")
+    user_id: str
+
+
+class ScanStartResponse(BaseModel):
+    session_id: str
+    status: str
+
+
+class ScanStopRequest(BaseModel):
+    session_id: str
+
+
+class ScanStopResponse(BaseModel):
+    session_id: str
+    total_flows: int
+    threat_count: int
+    ended_at: datetime | None = None
+    error: str | None = None
+
+
+class ScanStatusResponse(BaseModel):
+    running: bool
+    session_id: str | None = None
+    interface: str | None = None
+    flows_captured: int = 0
+    threats: int = 0
+    last_update: datetime | None = None
+    error: str | None = None

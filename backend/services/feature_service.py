@@ -79,6 +79,26 @@ class FeatureService:
         logger.info("Extracted %d flows with %d features from %s", len(df), len(df.columns), pcap_path)
         return df
 
+    async def extract_features_from_buffer(self, pcap_bytes: bytes) -> pd.DataFrame:
+        """Extract the 46-feature DataFrame from an in-memory PCAP buffer.
+
+        The legacy extractor only accepts file paths, so we persist the buffer
+        to a temp file, run the existing pipeline, and unlink. Callers can
+        treat the buffer as ephemeral.
+        """
+        loop = asyncio.get_running_loop()
+
+        def _run() -> pd.DataFrame:
+            with tempfile.NamedTemporaryFile(suffix=".pcap", delete=False) as tmp:
+                tmp.write(pcap_bytes)
+                tmp_path = tmp.name
+            try:
+                return _sync_extract(tmp_path)
+            finally:
+                Path(tmp_path).unlink(missing_ok=True)
+
+        return await loop.run_in_executor(None, _run)
+
     async def extract_connectivity_info(self, pcap_path: str) -> pd.DataFrame:
         """Lightweight per-packet pass to get IP/port identity data.
 
