@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import logging
 
@@ -10,7 +11,8 @@ from backend.models.enums import ClassLabel
 
 logger = logging.getLogger(__name__)
 
-MODEL_DIR = Path(__file__).resolve().parent.parent.parent / "notebooks" / "models"
+_DEFAULT_MODEL_DIR = Path(__file__).resolve().parent.parent.parent / "notebooks" / "models"
+MODEL_DIR = Path(os.environ.get("MODEL_DIR", str(_DEFAULT_MODEL_DIR)))
 
 
 class MLService:
