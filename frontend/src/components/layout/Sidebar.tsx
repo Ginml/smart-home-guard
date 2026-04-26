@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import { Shield, LayoutDashboard, History, Settings, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { LayoutDashboard, History, Settings, PanelLeftClose, PanelLeft } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useUiStore } from '@/store/uiStore'
+import logoMark from '@/assets/logo.svg'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -17,14 +18,16 @@ export function Sidebar() {
     <aside
       className={clsx(
         'fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-border bg-surface-raised transition-[width] duration-200',
-        collapsed ? 'w-16' : 'w-60',
+        collapsed ? 'w-16' : 'w-64',
       )}
     >
       {/* Logo */}
       <div className="flex h-[60px] items-center gap-3 border-b border-border px-4">
-        <Shield className="h-7 w-7 shrink-0 text-accent" />
+        <img src={logoMark} alt="Smart Home Guard" className="h-14 w-14 shrink-0" />
         {!collapsed && (
-          <span className="text-lg font-semibold text-content-primary">SmartHomeGuard</span>
+          <span className="whitespace-nowrap font-serif text-lg font-semibold text-content-primary">
+            Smart Home Guard
+          </span>
         )}
       </div>
 

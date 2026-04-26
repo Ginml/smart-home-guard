@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="31.190676mm"
+   height="25.38026mm"
+   viewBox="0 0 31.190676 25.38026"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0476431"
+     inkscape:cx="76.361883"
+     inkscape:cy="-11.454283"
+     inkscape:window-width="2548"
+     inkscape:window-height="1388"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <color-profile
+       name="Blue"
+       xlink:href="file:///usr/share/color/icc/colord/Bluish.icc"
+       id="color-profile2" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter527"
+       x="-0.064664182"
+       y="-0.024897325"
+       width="1.1293284"
+       height="1.0497956">
+      <feTurbulence
+         numOctaves="5"
+         seed="0"
+         type="fractalNoise"
+         baseFrequency="0.08"
+         id="feTurbulence527" />
+      <feGaussianBlur
+         stdDeviation="0.5 0"
+         result="result91"
+         id="feGaussianBlur527" />
+      <feDisplacementMap
+         scale="20"
+         yChannelSelector="G"
+         xChannelSelector="R"
+         in="SourceGraphic"
+         result="result1"
+         in2="result91"
+         id="feDisplacementMap527" />
+      <feComposite
+         in="result1"
+         in2="SourceGraphic"
+         operator="atop"
+         id="feComposite527" />
+    </filter>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-84.904664,-151.49627)">
+    <g
+       id="g429"
+       style="fill:none;fill-opacity:0.308427;stroke:#000000;stroke-width:0.982677;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
+      <path
+         id="path434"
+         style="fill:#e9e9ff;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel"
+         d="m 106.37877,165.58632 9.22523,-3.66848 v 11.77289 l -9.22523,2.71414 z"
+         points="115.604,161.91784 115.604,173.69073 106.37877,176.40487 106.37877,165.58632 " />
+      <path
+         id="path429"
+         style="fill:#353564;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel"
+         d="m 85.396002,157.30926 v 12.97181 l 20.982768,6.1238 v -10.81855 z"
+         points="85.396002,170.28107 106.37877,176.40487 106.37877,165.58632 85.396002,157.30926 " />
+      <path
+         id="path430"
+         style="fill:#4d4d9f;fill-rule:evenodd;stroke:none;stroke-linejoin:bevel"
+         d="m 85.396002,157.30926 8.999998,-5.36839 21.208,9.97697 -9.22523,3.66848 z"
+         points="94.396,151.94087 115.604,161.91784 106.37877,165.58632 85.396002,157.30926 " />
+      <path
+         id="path433"
+         style="fill:#b5b5d5;fill-opacity:0.308427;stroke-linejoin:bevel"
+         d="m 85.396002,170.28107 8.999998,-3.97181 21.208,7.38147 -9.22523,2.71414 z"
+         points="94.396,166.30926 115.604,173.69073 106.37877,176.40487 85.396002,170.28107 " />
+      <path
+         id="path432"
+         style="fill:#000000;stroke:#000000;stroke-linejoin:bevel"
+         d="m 94.396,151.94087 v 14.36839 l 21.208,7.38147 v -11.77289 z"
+         points="94.396,166.30926 115.604,173.69073 115.604,161.91784 94.396,151.94087 " />
+      <path
+         id="path431"
+         style="fill:none;stroke-linejoin:bevel"
+         d="M 85.396002,157.30926 94.396,151.94087 v 14.36839 l -8.999998,3.97181 z"
+         points="94.396,151.94087 94.396,166.30926 85.396002,170.28107 85.396002,157.30926 " />
+    </g>
+    <g
+       id="g498"
+       style="fill:none;fill-opacity:0.308427;stroke:#000000;stroke-width:0.982677;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter527)">
+      <path
+         id="path503"
+         style="fill:#e9e9ff;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         d="m 106.54126,165.85348 7.03661,-3.66198 v 9.23005 l -7.03661,2.93017 z"
+         points="113.57787,162.1915 113.57787,171.42155 106.54126,174.35172 106.54126,165.85348 " />
+      <path
+         id="path498"
+         style="fill:#353564;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         d="m 87.422146,159.51573 v 9.76477 l 19.119114,5.07122 v -8.49824 z"
+         points="87.422146,169.2805 106.54126,174.35172 106.54126,165.85348 87.422146,159.51573 " />
+      <path
+         id="path499"
+         style="fill:#4d4d9f;fill-rule:evenodd;stroke:none;stroke-linejoin:round"
+         d="m 87.422146,159.51573 6.27405,-4.89771 19.881674,7.57348 -7.03661,3.66198 z"
+         points="93.696196,154.61802 113.57787,162.1915 106.54126,165.85348 87.422146,159.51573 " />
+      <path
+         id="path502"
+         style="fill:#b5b5d5;fill-opacity:0.308427"
+         d="m 87.422146,169.2805 6.27405,-3.91895 19.881674,6.06 -7.03661,2.93017 z"
+         points="93.696196,165.36155 113.57787,171.42155 106.54126,174.35172 87.422146,169.2805 " />
+      <path
+         id="path501"
+         style="fill:#000000;stroke:#000000"
+         d="m 93.696196,154.61802 v 10.74353 l 19.881674,6.06 v -9.23005 z"
+         points="93.696196,165.36155 113.57787,171.42155 113.57787,162.1915 93.696196,154.61802 " />
+      <path
+         id="path500"
+         style="fill:none"
+         d="m 87.422146,159.51573 6.27405,-4.89771 v 10.74353 l -6.27405,3.91895 z"
+         points="93.696196,154.61802 93.696196,165.36155 87.422146,169.2805 87.422146,159.51573 " />
+    </g>
+  </g>
+</svg>

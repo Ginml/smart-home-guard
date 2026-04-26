@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Shield } from 'lucide-react'
+import logoMark from '@/assets/logo.svg'
 import { clsx } from 'clsx'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/Button'
@@ -53,12 +53,11 @@ export function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-surface-base px-4">
       <div className="w-full max-w-sm">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <Shield className="mx-auto h-12 w-12 text-accent" />
-          <h1 className="mt-4 text-2xl font-bold text-content-primary">SmartHomeGuard</h1>
-          <p className="mt-1 text-sm text-content-secondary">
-            Protect your smart home network
-          </p>
+        <div className="mb-8 flex flex-col items-center justify-center gap-3">
+          <img src={logoMark} alt="Smart Home Guard" className="h-32 w-auto" />
+          <span className="font-serif text-3xl font-semibold text-content-primary">
+            Smart Home Guard
+          </span>
         </div>
 
         {/* Tabs */}
