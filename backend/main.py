@@ -32,8 +32,8 @@ async def lifespan(app: FastAPI):
     try:
         ml_service.load()
         logger.info("ML model loaded in %.2fs", time.time() - t0)
-    except FileNotFoundError as e:
-        logger.warning("ML model files not found — running without model: %s", e)
+    except Exception as e:
+        logger.warning("ML model could not be loaded — running without model: %s", e)
     app.state.ml_service = ml_service
     app.state.feature_service = FeatureService()
 
