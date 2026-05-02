@@ -219,3 +219,8 @@ utils/pcap2csv/csv_files
 utils/pcap2csv/output
 utils/pcap2csv/pcaps
 utils/pcap2csv/split_temp
+notebooks/training copy.ipynb
+notebooks/dataset_filter_2.ipynb
+notebooks/data2.ipynb
+notebooks/data/MERGED_CSV
+notebooks/data/ciciot2023_filtered.parquet

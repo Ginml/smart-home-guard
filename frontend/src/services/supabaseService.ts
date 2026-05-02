@@ -77,13 +77,18 @@ export async function updateUserPreferences(
   userId: string,
   prefs: Partial<Omit<UserPreferences, 'userId' | 'updatedAt'>>,
 ): Promise<void> {
-  const update: Record<string, unknown> = { updated_at: new Date().toISOString() }
+  const update: Record<string, unknown> = {
+    user_id: userId,
+    updated_at: new Date().toISOString(),
+  }
   if (prefs.username !== undefined) update.username = prefs.username
   if (prefs.notifyCritical !== undefined) update.notify_critical = prefs.notifyCritical
   if (prefs.notifyHigh !== undefined) update.notify_high = prefs.notifyHigh
   if (prefs.notifyMedium !== undefined) update.notify_medium = prefs.notifyMedium
   if (prefs.emailAlerts !== undefined) update.email_alerts = prefs.emailAlerts
   if (prefs.defaultScanMode !== undefined) update.default_scan_mode = prefs.defaultScanMode
-  const { error } = await supabase.from('user_preferences').update(update).eq('user_id', userId)
+  const { error } = await supabase
+    .from('user_preferences')
+    .upsert(update, { onConflict: 'user_id' })
   if (error) throw error
 }

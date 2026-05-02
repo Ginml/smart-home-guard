@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Bell, Sun, Moon, LogOut, ChevronDown } from 'lucide-react'
 import { clsx } from 'clsx'
+import { useQuery } from '@tanstack/react-query'
 import { useThemeStore } from '@/store/themeStore'
 import { useAlertStore } from '@/store/alertStore'
 import { useAuth } from '@/hooks/useAuth'
+import { getUserPreferences } from '@/services/supabaseService'
 
 const routeTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -17,8 +19,15 @@ export function TopBar() {
   const navigate = useNavigate()
   const { theme, toggleTheme } = useThemeStore()
   const unreadCount = useAlertStore((s) => s.unreadCount)
-  const { user, username, logout } = useAuth()
+  const { user, logout } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const { data: prefs } = useQuery({
+    queryKey: ['user-preferences', user?.id ?? ''],
+    queryFn: () => getUserPreferences(user!.id),
+    enabled: !!user?.id,
+  })
+  const username = prefs?.username ?? null
 
   const title = routeTitles[location.pathname] ?? 'SmartHomeGuard'
 

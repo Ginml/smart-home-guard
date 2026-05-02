@@ -1,29 +1,15 @@
-import type { LucideIcon } from 'lucide-react'
 import { Skeleton } from '@/components/ui/Skeleton'
 
 interface KpiCardProps {
   title: string
   value: string | number
   subtitle?: string
-  icon: LucideIcon
-  accentColor: string
   loading?: boolean
 }
 
-export function KpiCard({
-  title,
-  value,
-  subtitle,
-  icon: Icon,
-  accentColor,
-  loading,
-}: KpiCardProps) {
+export function KpiCard({ title, value, subtitle, loading }: KpiCardProps) {
   return (
-    <div
-      className="flex flex-col gap-2 rounded-md border border-border bg-surface-raised p-4 pl-5"
-      style={{ borderLeft: `4px solid ${accentColor}` }}
-    >
-      <Icon className="h-5 w-5" style={{ color: accentColor }} aria-hidden />
+    <div className="flex flex-col gap-2 rounded-md border border-border bg-surface-raised p-4">
       {loading ? (
         <Skeleton className="h-8 w-24" />
       ) : (

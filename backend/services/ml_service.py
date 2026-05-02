@@ -2,9 +2,9 @@ from pathlib import Path
 import logging
 
 import joblib
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
+from xgboost import XGBClassifier
 
 from backend.models.enums import ClassLabel
 
@@ -15,7 +15,7 @@ MODEL_DIR = Path(__file__).resolve().parent.parent.parent / "notebooks" / "model
 
 class MLService:
     def __init__(self, model_path: Path = MODEL_DIR):
-        self.model: lgb.Booster | None = None
+        self.model: XGBClassifier | None = None
         self.scaler = None
         self.label_encoder = None
         self.model_path = model_path
@@ -24,9 +24,10 @@ class MLService:
         """Load model, scaler, and label encoder from disk."""
         logger.info("Loading ML artifacts from %s", self.model_path)
 
-        self.model = lgb.Booster(model_file=str(self.model_path / "lightgbm_v2.txt"))
-        self.scaler = joblib.load(self.model_path / "scaler_v2.pkl")
-        self.label_encoder = joblib.load(self.model_path / "label_encoder_v2.pkl")
+        self.model = XGBClassifier()
+        self.model.load_model(str(self.model_path / "xgboost.json"))
+        self.scaler = joblib.load(self.model_path / "scaler.pkl")
+        self.label_encoder = joblib.load(self.model_path / "label_encoder.pkl")
 
         logger.info(
             "Model loaded — classes: %s", list(self.label_encoder.classes_)
@@ -39,7 +40,7 @@ class MLService:
     def predict(self, features_df: pd.DataFrame) -> list[dict]:
         """Scale features, run inference, return predictions with confidence."""
         scaled = self.scaler.transform(features_df)
-        probabilities = self.model.predict(scaled)  # (n_samples, n_classes)
+        probabilities = self.model.predict_proba(scaled)  # (n_samples, n_classes)
         predicted_indices = np.argmax(probabilities, axis=1)
         categories = self.label_encoder.inverse_transform(predicted_indices)
         confidences = np.max(probabilities, axis=1)

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, startTransition } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { KpiGrid } from '@/components/dashboard/KpiGrid'
 import { TrafficDonut } from '@/components/dashboard/TrafficDonut'
 import { ThreatTimeline } from '@/components/dashboard/ThreatTimeline'
@@ -10,8 +10,6 @@ import { AlertFeed } from '@/components/dashboard/AlertFeed'
 import { ScanPanel } from '@/components/scan/ScanPanel'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { useScanStore } from '@/store/scanStore'
-import { useRealtimeFlows } from '@/hooks/useRealtimeFlows'
-import { useSessionStatus } from '@/hooks/useSessionStatus'
 import type { NetworkFlow } from '@/types'
 
 interface TimelinePoint {
@@ -22,7 +20,8 @@ interface TimelinePoint {
   bruteForce: number
 }
 
-const MAX_TIMELINE_POINTS = 30
+const MAX_TIMELINE_POINTS = 80
+const MIN_TIMELINE_INTERVAL_MS = 200
 
 function computeFlagData(flows: NetworkFlow[]) {
   if (flows.length === 0) return []
@@ -51,44 +50,40 @@ function computeFlagData(flows: NetworkFlow[]) {
 }
 
 export function DashboardPage() {
-  useRealtimeFlows()
-  useSessionStatus()
-
   const status = useScanStore((s) => s.status)
   const flowSummary = useScanStore((s) => s.flowSummary)
   const liveFlows = useScanStore((s) => s.liveFlows)
 
   const [timelineData, setTimelineData] = useState<TimelinePoint[]>([])
   const frozenRef = useRef(false)
+  const lastPushRef = useRef(0)
 
-  // Tick timeline every 2s while scanning; freeze on completion
+  // Push a timeline point on every flowSummary update while scanning, throttled
+  // to MIN_TIMELINE_INTERVAL_MS so high-rate batches don't overwhelm recharts.
+  // Freeze on completion so the final chart stays put.
   useEffect(() => {
-    if (status === 'scanning') {
-      frozenRef.current = false
-    }
     if (status === 'completed' || status === 'error') {
       frozenRef.current = true
       return
     }
     if (status !== 'scanning') return
+    frozenRef.current = false
+    if (!flowSummary) return
 
-    const id = setInterval(() => {
-      if (frozenRef.current) return
-      startTransition(() => {
-        setTimelineData((prev) => {
-          const point: TimelinePoint = {
-            timestamp: new Date().toISOString(),
-            benign: flowSummary?.benignCount ?? 0,
-            spoofing: flowSummary?.spoofingCount ?? 0,
-            recon: flowSummary?.reconCount ?? 0,
-            bruteForce: flowSummary?.bruteForceCount ?? 0,
-          }
-          return [...prev, point].slice(-MAX_TIMELINE_POINTS)
-        })
-      })
-    }, 2000)
+    const now = Date.now()
+    if (now - lastPushRef.current < MIN_TIMELINE_INTERVAL_MS) return
+    lastPushRef.current = now
 
-    return () => clearInterval(id)
+    setTimelineData((prev) => {
+      const point: TimelinePoint = {
+        timestamp: new Date().toISOString(),
+        benign: flowSummary.benignCount,
+        spoofing: flowSummary.spoofingCount,
+        recon: flowSummary.reconCount,
+        bruteForce: flowSummary.bruteForceCount,
+      }
+      return [...prev, point].slice(-MAX_TIMELINE_POINTS)
+    })
   }, [status, flowSummary])
 
   const flagData = useMemo(() => computeFlagData(liveFlows), [liveFlows])
